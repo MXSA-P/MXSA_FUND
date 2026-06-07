@@ -533,8 +533,8 @@
       <div class="prog-wrap">
         <div class="prog-labels">
           <!-- FIX: correct raised amount shown as cyan -->
-          <span class="prog-raised">₹<b id="raisedAmt">725</b></span>
-          <span class="prog-goal">Goal: ₹<span id="goalAmt">2,000</span></span>
+          <span class="prog-raised">₹<b id="raisedAmt">0</b></span>
+          <span class="prog-goal">Goal: ₹<span id="goalAmt">0</span></span>
         </div>
         <div class="prog-bar"><div class="prog-fill" id="pFill"></div></div>
         <div class="prog-meta">
@@ -591,9 +591,8 @@
           <button class="amt" onclick="setAmt(2000,this)">₹2,000</button>
         </div>
 
-        <!-- FIX: clean UPI URL — only pa, pn, am -->
-        <a href="upi://pay?pa=maxsharma0137@fam&pn=Vikalpsharms&am=50.0"
-           class="upi-btn" id="upiBtn">⚡ Pay ₹50 via UPI</a>
+        <!-- UPI button: uses JS onclick so the URL goes to the OS as-is, not via browser href normalisation -->
+        <button type="button" class="upi-btn" id="upiBtn" onclick="openUPI()">⚡ Pay ₹50 via UPI</button>
 
         <div class="pay-note">
           Works with PhonePe, Google Pay, Paytm, BHIM &amp; all UPI apps.<br>
@@ -647,7 +646,7 @@
       <div class="ft-col">
         <h5>Support</h5>
         <!-- FIX: clean footer UPI link too -->
-        <a href="upi://pay?pa=maxsharma0137@fam&pn=Vikalpsharms&am=50.0">Pay via UPI</a>
+        <a href="upi://pay?pa=maxsharma0137@fam&pn=Vikalpsharms">Pay via UPI</a>
         <a href="#fund">maxsharma0137@fam</a>
       </div>
     </div>
@@ -717,7 +716,7 @@ document.querySelectorAll('[data-val]').forEach(el => co.observe(el));
 
 /* ── PROGRESS BAR — FIX ── */
 // Change raised/goal here to update the bar automatically
-const RAISED = 150;
+const RAISED = 725;
 const GOAL   = 2000;
 
 const fo = new IntersectionObserver(entries => {
