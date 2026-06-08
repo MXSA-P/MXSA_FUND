@@ -581,22 +581,19 @@
 
         <div class="upi-id">UPI Payment ID<strong>maxsharma0137@fam</strong></div>
 
-        <div style="font-size:.65rem;letter-spacing:.22em;color:var(--dim);text-transform:uppercase;margin-bottom:8px;">Quick Amounts (₹)</div>
+        <div style="font-size:.65rem;letter-spacing:.22em;color:var(--dim);text-transform:uppercase;margin-bottom:8px;">Tap to Pay Directly (₹)</div>
         <div class="amts">
-          <button class="amt on" onclick="setAmt(50,this)">₹50</button>
-          <button class="amt" onclick="setAmt(100,this)">₹100</button>
-          <button class="amt" onclick="setAmt(200,this)">₹200</button>
-          <button class="amt" onclick="setAmt(500,this)">₹500</button>
-          <button class="amt" onclick="setAmt(1000,this)">₹1,000</button>
-          <button class="amt" onclick="setAmt(2000,this)">₹2,000</button>
+          <a class="amt" href="upi://pay?pa=maxsharma0137@fam&pn=Vikalpsharms&am=50.0">₹50</a>
+          <a class="amt" href="upi://pay?pa=maxsharma0137@fam&pn=Vikalpsharms&am=100.0">₹100</a>
+          <a class="amt" href="upi://pay?pa=maxsharma0137@fam&pn=Vikalpsharms&am=200.0">₹200</a>
+          <a class="amt" href="upi://pay?pa=maxsharma0137@fam&pn=Vikalpsharms&am=500.0">₹500</a>
+          <a class="amt" href="upi://pay?pa=maxsharma0137@fam&pn=Vikalpsharms&am=1000.0">₹1,000</a>
+          <a class="amt" href="upi://pay?pa=maxsharma0137@fam&pn=Vikalpsharms&am=2000.0">₹2,000</a>
         </div>
 
-        <!-- UPI button: uses JS onclick so the URL goes to the OS as-is, not via browser href normalisation -->
-        <button type="button" class="upi-btn" id="upiBtn" onclick="openUPI()">⚡ Pay ₹50 via UPI</button>
-
-        <div class="pay-note">
-          Works with PhonePe, Google Pay, Paytm, BHIM &amp; all UPI apps.<br>
-          Every rupee goes directly to project development.
+        <div class="pay-note" style="margin-top:0;">
+          Tap any amount above to open your UPI app directly.<br>
+          Or scan the QR code — works with PhonePe, GPay, Paytm &amp; BHIM.
         </div>
       </div>
     </div>
@@ -658,6 +655,17 @@
 </footer>
 
 <script>
+/* ════════════════════════════════════════════════
+   CONFIG — only this block needs editing
+   ════════════════════════════════════════════════ */
+const RAISED = 725;   // ← update as donations come in
+const GOAL   = 2000;
+/* ════════════════════════════════════════════════ */
+
+/* Apply raised/goal to DOM immediately */
+document.getElementById('raisedAmt').textContent = RAISED.toLocaleString('en-IN');
+document.getElementById('goalAmt').textContent   = GOAL.toLocaleString('en-IN');
+
 /* ── PRELOADER ── */
 window.addEventListener('load', () => setTimeout(() => document.getElementById('loader').classList.add('out'), 1600));
 
@@ -714,11 +722,7 @@ const co = new IntersectionObserver(entries => {
 }, { threshold: .5 });
 document.querySelectorAll('[data-val]').forEach(el => co.observe(el));
 
-/* ── PROGRESS BAR — FIX ── */
-// Change raised/goal here to update the bar automatically
-const RAISED = 725;
-const GOAL   = 2000;
-
+/* ── PROGRESS BAR — driven by RAISED / GOAL above ── */
 const fo = new IntersectionObserver(entries => {
   if (entries[0].isIntersecting) {
     const pct = Math.min((RAISED / GOAL) * 100, 100).toFixed(2);
@@ -728,21 +732,6 @@ const fo = new IntersectionObserver(entries => {
 }, { threshold: .3 });
 const fundSec = document.getElementById('fund');
 if (fundSec) fo.observe(fundSec);
-
-/* ── AMOUNT SELECTION — FIX ── */
-// Clean UPI URL: only pa, pn, am — no cu/tn that cause "payment exceeded" errors
-function setAmt(amt, btn) {
-  document.querySelectorAll('.amt').forEach(b => b.classList.remove('on'));
-  btn.classList.add('on');
-  const amtFmt = parseFloat(amt).toFixed(1);
-  // Update QR code to match selected amount
-  document.getElementById('qrImg').src =
-    `https://api.qrserver.com/v1/create-qr-code/?size=156x156&data=upi%3A%2F%2Fpay%3Fpa%3Dmaxsharma0137%40fam%26pn%3DVikalpsharms%26am%3D${amtFmt}&bgcolor=ffffff&color=000000&margin=4`;
-  document.getElementById('upiBtn').href =
-    `upi://pay?pa=maxsharma0137@fam&pn=Vikalpsharms&am=${amtFmt}`;
-  document.getElementById('upiBtn').textContent =
-    `⚡ Pay ₹${Number(amt).toLocaleString('en-IN')} via UPI`;
-}
 
 /* ── FAQ ── */
 function faq(el) {
@@ -766,11 +755,14 @@ document.getElementById('lb-x').onclick = () => document.getElementById('lb').cl
 document.getElementById('lb').onclick = e => { if (e.target === e.currentTarget) e.currentTarget.classList.remove('on'); };
 
 /* ── SMOOTH SCROLL ── */
-document.querySelectorAll('a[href^="#"]').forEach(a =>
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  const href = a.getAttribute('href');
+  if (!href || href === '#') return;           // skip bare # — querySelector('#') is invalid
   a.addEventListener('click', e => {
-    const t = document.querySelector(a.getAttribute('href'));
+    const t = document.querySelector(href);
     if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
-  }));
+  });
+});
 </script>
 </body>
 </html>
