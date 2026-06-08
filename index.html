@@ -641,7 +641,6 @@
       </div>
       <div class="ft-col">
         <h5>Support</h5>
-        <!-- FIX: clean footer UPI link too -->
         <a href="upi://pay?pa=maxsharma0137@fam&pn=Vikalpsharms">Pay via UPI</a>
         <a href="#fund">maxsharma0137@fam</a>
       </div>
@@ -662,9 +661,21 @@ const GOAL         = 2000;
 const CONTRIBUTORS = 3;
 /* ════════════════════════════════════════════════ */
 
-/* Apply to DOM — belt-and-suspenders over the hardcoded HTML values */
-document.getElementById('raisedAmt').textContent = RAISED.toLocaleString('en-IN');
-document.getElementById('goalAmt').textContent   = GOAL.toLocaleString('en-IN');
+/* ── SAFE NUMBER FORMATTER ──
+   toLocaleString('en-IN') returns "0" on some Android/mobile browsers.
+   This helper formats with commas reliably on every device.            */
+function fmtINR(n) {
+  var s = String(Math.round(n));
+  /* Indian grouping: last 3 digits, then groups of 2 */
+  if (s.length <= 3) return s;
+  var last3 = s.slice(-3);
+  var rest   = s.slice(0, -3);
+  return rest.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + ',' + last3;
+}
+
+/* Apply config values to DOM immediately */
+document.getElementById('raisedAmt').textContent = fmtINR(RAISED);
+document.getElementById('goalAmt').textContent   = fmtINR(GOAL);
 document.getElementById('bcnt').textContent      = CONTRIBUTORS;
 
 /* ── PRELOADER ── */
@@ -758,7 +769,7 @@ document.getElementById('lb').onclick = e => { if (e.target === e.currentTarget)
 /* ── SMOOTH SCROLL ── */
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   const href = a.getAttribute('href');
-  if (!href || href === '#') return;           // skip bare # — querySelector('#') is invalid
+  if (!href || href === '#') return;
   a.addEventListener('click', e => {
     const t = document.querySelector(href);
     if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
