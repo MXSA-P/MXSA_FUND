@@ -532,13 +532,12 @@
 
       <div class="prog-wrap">
         <div class="prog-labels">
-          <!-- FIX: correct raised amount shown as cyan -->
-          <span class="prog-raised">₹<b id="raisedAmt">0</b></span>
-          <span class="prog-goal">Goal: ₹<span id="goalAmt">0</span></span>
+          <span class="prog-raised">₹<b id="raisedAmt">725</b></span>
+          <span class="prog-goal">Goal: ₹<span id="goalAmt">2,000</span></span>
         </div>
         <div class="prog-bar"><div class="prog-fill" id="pFill"></div></div>
         <div class="prog-meta">
-          <div class="pm"><strong id="bcnt">0</strong>Contributors</div>
+          <div class="pm"><strong id="bcnt">3</strong>Contributors</div>
           <div class="pm"><strong>Open</strong>Status</div>
           <div class="pm"><strong>100%</strong>Open Source</div>
         </div>
@@ -658,13 +657,15 @@
 /* ════════════════════════════════════════════════
    CONFIG — only this block needs editing
    ════════════════════════════════════════════════ */
-const RAISED = 725;   // ← update as donations come in
-const GOAL   = 2000;
+const RAISED       = 725;   // ← update as donations come in
+const GOAL         = 2000;
+const CONTRIBUTORS = 3;
 /* ════════════════════════════════════════════════ */
 
-/* Apply raised/goal to DOM immediately */
+/* Apply to DOM — belt-and-suspenders over the hardcoded HTML values */
 document.getElementById('raisedAmt').textContent = RAISED.toLocaleString('en-IN');
 document.getElementById('goalAmt').textContent   = GOAL.toLocaleString('en-IN');
+document.getElementById('bcnt').textContent      = CONTRIBUTORS;
 
 /* ── PRELOADER ── */
 window.addEventListener('load', () => setTimeout(() => document.getElementById('loader').classList.add('out'), 1600));
