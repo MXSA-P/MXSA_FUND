@@ -575,26 +575,34 @@
     <div class="rv">
       <div class="pay-card">
         <div class="pay-t">Contribute via UPI</div>
-        <div class="pay-s">Scan the QR code or tap the button to open your UPI app</div>
+        <div class="pay-s">Fund To MXSA</div>
 
-        <!-- QR encodes upi://pay?pa=maxsharma0137@fam (no preset amount) -->
         <div class="qr-wrap">
           <img id="qrImg"
-            src="https://api.qrserver.com/v1/create-qr-code/?size=156x156&data=upi%3A%2F%2Fpay%3Fpa%3Dmaxsharma0137%40fam&bgcolor=ffffff&color=000000&margin=4"
+            src=""
             width="156" height="156" alt="Scan to Pay — UPI">
         </div>
 
         <div class="upi-id">UPI Payment ID<strong>maxsharma0137@fam</strong></div>
 
-        <a class="upi-btn"
-          href="upi://pay?pa=maxsharma0137@fam&pn=Project%20MXSA&cu=INR&tn=Support%20Project%20MXSA">
-          FUND
-        </a>
+        <a class="upi-btn" id="fundBtn" href="#">FUND</a>
 
         <div class="pay-note">
           Tap FUND to open your UPI app directly.<br>
           Or scan the QR code — works with PhonePe, GPay, Paytm &amp; BHIM.
         </div>
+
+        <script>
+          var upiLink = 'upi://pay?pa=maxsharma0137@fam&pn=Project%20MXSA&cu=INR&tn=Fund%20To%20MXSA';
+          document.getElementById('fundBtn').href = upiLink;
+          document.getElementById('fundBtn').addEventListener('click', function (e) {
+            e.preventDefault();
+            window.location.href = upiLink;
+          });
+          document.getElementById('qrImg').src =
+            'https://api.qrserver.com/v1/create-qr-code/?size=156x156&data=' +
+            encodeURIComponent(upiLink);
+        </script>
       </div>
     </div>
 
