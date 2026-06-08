@@ -585,23 +585,32 @@
 
         <div class="upi-id">UPI Payment ID<strong>maxsharma0137@fam</strong></div>
 
-        <a class="upi-button" id="__UPI_BUTTON__" href="#">FUND</a>
+        <!-- The Button -->
+        <a class="upi-btn" href="#" onclick="openUpiApp(event)">FUND</a>
 
         <div class="pay-note">
           Tap FUND to open your UPI app directly.<br>
           Or scan the QR code — works with PhonePe, GPay, Paytm &amp; BHIM.
         </div>
 
+        <!-- The Script -->
         <script>
-          var upiLink = 'upi://pay?pa=maxsharma0137@fam&pn=VIKALP&cu=INR';
-          document.getElementById('__UPI_BUTTON__').href = upiLink;
-          document.getElementById('__UPI_BUTTON__').addEventListener('click', function (e) {
-            e.preventDefault();
-            window.location.href = upiLink;
-          });
+          function openUpiApp(event) {
+            // Prevent the default link behavior
+            event.preventDefault();
+
+            // Your exact UPI deep link string
+            var upiUrl = 'upi://pay?pa=maxsharma0137@fam&pn=Project&cu=INR&tn=Support%20Project%20MXSA';
+
+            // Force a clean system-level window redirection
+            // This bypasses the in-app browser security restrictions
+            window.location.href = upiUrl;
+          }
+
+          // Generate QR code from the same UPI URL
           document.getElementById('qrImg').src =
             'https://api.qrserver.com/v1/create-qr-code/?size=156x156&data=' +
-            encodeURIComponent(upiLink);
+            encodeURIComponent('upi://pay?pa=maxsharma0137@fam&pn=Project&cu=INR&tn=Support%20Project%20MXSA');
         </script>
       </div>
     </div>
