@@ -269,12 +269,12 @@
     .upi-id { text-align:center; font-size:.7rem; color:var(--dim); margin-bottom:26px;
       padding:10px; background:var(--s3); border:1px solid var(--border); }
     .upi-id strong { color:var(--cyan); display:block; font-size:.82rem; margin-top:4px; letter-spacing:.05em; }
-    .upi-btn { display:block; width:100%; padding:15px; background:var(--cyan); color:var(--void);
+    .upi-btn, .upi-button { display:block; width:100%; padding:15px; background:var(--cyan); color:var(--void);
       font-family:var(--bf); font-weight:700; font-size:.85rem; letter-spacing:.35em;
       text-transform:uppercase; text-decoration:none; text-align:center; border:none; cursor:pointer;
       clip-path:polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
       transition:all .3s; }
-    .upi-btn:hover { opacity:.85; transform:translateY(-2px); box-shadow:0 10px 30px var(--cyan-g); }
+    .upi-btn:hover, .upi-button:hover { opacity:.85; transform:translateY(-2px); box-shadow:0 10px 30px var(--cyan-g); }
     .pay-note { font-size:.67rem; color:var(--dim); text-align:center; margin-top:14px; line-height:1.7; }
 
     /* ── FAQ ── */
@@ -585,7 +585,7 @@
 
         <div class="upi-id">UPI Payment ID<strong>maxsharma0137@fam</strong></div>
 
-        <a class="upi-btn" id="fundBtn" href="#">FUND</a>
+        <a class="upi-button" id="fundBtn" href="#">FUND</a>
 
         <div class="pay-note">
           Tap FUND to open your UPI app directly.<br>
@@ -593,7 +593,7 @@
         </div>
 
         <script>
-          var upiLink = 'upi://pay?pa=maxsharma0137@fam&pn=Project%20MXSA&cu=INR&tn=Fund%20To%20MXSA';
+          var upiLink = 'upi://pay?pa=maxsharma0137@fam&pn=MXAI%20Project&cu=INR&tn=Fund%20To%20MXAI';
           document.getElementById('fundBtn').href = upiLink;
           document.getElementById('fundBtn').addEventListener('click', function (e) {
             e.preventDefault();
