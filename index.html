@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+    /* ════════════════════════════════════════════════
+       CONFIGURATION VARIABLES
+       Update these variables to reflect your project's current status.
+       They automatically control the text, stats, and progress bar.
+       ════════════════════════════════════════════════ */
+    const RAISED = 926;
+    const GOAL = 2000;
+    const CONTRIBUTORS = ["Neha Vohra[Biggest Donater]", "Vinus Sharma", "Shivali Gupta", "Vikalp Sharma"]; // Add all contributors' names here
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Project MXSA — Bionic Intelligence</title>
   <meta name="description" content="Fund Project MXSA: an AI-powered bionic arm with true haptic sensation. Join the future of human augmentation.">
   <meta property="og:title" content="Project MXSA — Bionic Intelligence">
   <meta property="og:description" content="An AI-powered bionic arm with haptic feeling. Fund the future.">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Syne:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
     :root {
       --void:    #020207;
       --s1:      #07070f;
@@ -32,9 +39,7 @@
       --df:      'Syncopate', sans-serif;
       --bf:      'Syne', sans-serif;
     }
-
     html { scroll-behavior: smooth; }
-
     body {
       background: var(--void);
       color: var(--text);
@@ -42,14 +47,12 @@
       overflow-x: hidden;
       cursor: none;
     }
-
     /* ── CUSTOM CURSOR ── */
     #cur { width:10px; height:10px; background:var(--cyan); border-radius:50%;
       position:fixed; top:0; left:0; pointer-events:none; z-index:9999;
       transition:transform .15s; mix-blend-mode:difference; }
     #cur-r { width:38px; height:38px; border:1px solid rgba(0,229,255,.4); border-radius:50%;
       position:fixed; top:0; left:0; pointer-events:none; z-index:9998; }
-
     /* ── PRELOADER ── */
     #loader { position:fixed; inset:0; background:var(--void); z-index:10000;
       display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px;
@@ -63,10 +66,8 @@
       background:var(--cyan); animation:preload 1.6s ease forwards; }
     .pre-sub { font-size:.6rem; letter-spacing:.5em; color:var(--dim); text-transform:uppercase; }
     @keyframes preload { to { width:100%; } }
-
     /* ── CANVAS BG ── */
     #bg { position:fixed; inset:0; z-index:0; pointer-events:none; }
-
     /* ── NAV ── */
     nav {
       position:fixed; top:0; left:0; right:0; z-index:100;
@@ -88,7 +89,6 @@
     .nav-cta:hover { background:var(--cyan) !important; color:var(--void) !important; }
     .ham { display:none; flex-direction:column; gap:5px; cursor:pointer; z-index:101; }
     .ham span { display:block; width:22px; height:1px; background:var(--bright); transition:all .3s; }
-
     /* ── HERO ── */
     .hero {
       position:relative; min-height:100vh;
@@ -96,12 +96,10 @@
       padding:90px 5% 60px; z-index:1;
     }
     .hero-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; width:100%; }
-
     .h-tag { font-size:.65rem; letter-spacing:.45em; color:var(--cyan); text-transform:uppercase;
       margin-bottom:18px; display:flex; align-items:center; gap:12px;
       opacity:0; animation:fUp .8s ease 1.8s forwards; }
     .h-tag::before { content:''; width:28px; height:1px; background:var(--cyan); }
-
     .h-title { font-family:var(--df); color:var(--bright); line-height:.9;
       margin-bottom:28px; opacity:0; animation:fUp .8s ease 2s forwards; }
     .h-title .sm { font-size:clamp(.8rem,1.8vw,1.1rem); letter-spacing:.6em;
@@ -109,12 +107,9 @@
     .h-title .big { font-size:clamp(3.8rem,10vw,8.5rem); display:block; letter-spacing:.04em;
       background:linear-gradient(135deg, #fff 30%, var(--cyan));
       -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-
     .h-desc { font-size:clamp(.85rem,1.4vw,.95rem); line-height:1.85; color:var(--text);
       max-width:460px; margin-bottom:36px; opacity:0; animation:fUp .8s ease 2.2s forwards; }
-
     .h-acts { display:flex; gap:14px; align-items:center; opacity:0; animation:fUp .8s ease 2.4s forwards; }
-
     .btn-p { padding:13px 30px; background:var(--cyan); color:var(--void);
       font-family:var(--bf); font-weight:700; font-size:.72rem; letter-spacing:.2em;
       text-transform:uppercase; text-decoration:none; border:none; cursor:pointer;
@@ -127,7 +122,6 @@
       clip-path:polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
       transition:all .3s; }
     .btn-g:hover { border-color:var(--cyan); color:var(--cyan); }
-
     /* ── HERO VISUAL ── */
     .h-vis { position:relative; height:480px; opacity:0; animation:fIn 1s ease 2s forwards; }
     .h-frame { width:100%; height:100%; border:1px solid var(--border);
@@ -143,7 +137,6 @@
     .co-tr{top:12px;right:12px;border-top:1px solid var(--cyan);border-right:1px solid var(--cyan);}
     .co-bl{bottom:12px;left:12px;border-bottom:1px solid var(--cyan);border-left:1px solid var(--cyan);}
     .co-br{bottom:12px;right:12px;border-bottom:1px solid var(--cyan);border-right:1px solid var(--cyan);}
-
     /* ── SCROLL HINT ── */
     .scroll-hint { position:absolute; bottom:36px; left:50%; transform:translateX(-50%);
       display:flex; flex-direction:column; align-items:center; gap:8px;
@@ -152,7 +145,6 @@
     .scl-line { width:1px; height:44px; background:linear-gradient(to bottom,var(--cyan),transparent);
       animation:pulse 2s ease infinite; }
     @keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:1} }
-
     /* ── STATS ── */
     .stats { position:relative; z-index:1; padding:36px 5%;
       border-top:1px solid var(--border); border-bottom:1px solid var(--border);
@@ -164,7 +156,6 @@
       color:var(--bright); display:block; line-height:1.1; }
     .stat-n b { color:var(--cyan); font-weight:inherit; }
     .stat-l { font-size:.62rem; letter-spacing:.22em; color:var(--dim); text-transform:uppercase; margin-top:4px; }
-
     /* ── SECTIONS ── */
     section { position:relative; z-index:1; }
     .pad { padding:96px 5%; }
@@ -175,7 +166,6 @@
       color:var(--bright); line-height:1; margin-bottom:18px; }
     .s-title em { font-style:normal; color:var(--cyan); }
     .s-desc { font-size:.93rem; line-height:1.85; color:var(--text); max-width:580px; }
-
     /* ── ABOUT ── */
     .about { background:var(--s1); }
     .about-g { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
@@ -190,7 +180,6 @@
     .a-card h4 { font-family:var(--df); font-size:.72rem; color:var(--bright);
       letter-spacing:.08em; margin-bottom:6px; }
     .a-card p { font-size:.82rem; color:var(--dim); line-height:1.65; }
-
     /* ── FEATURES ── */
     .feat-g { display:grid; grid-template-columns:repeat(2,1fr); gap:2px; margin-top:56px; }
     .f-card { background:var(--s1); padding:48px 38px; border:1px solid var(--border);
@@ -207,7 +196,6 @@
     .f-title { font-family:var(--df); font-size:.82rem; color:var(--bright);
       letter-spacing:.06em; margin-bottom:14px; }
     .f-desc { font-size:.87rem; line-height:1.72; color:var(--dim); }
-
     /* ── GALLERY ── */
     .gallery { background:var(--s1); }
     .gal-hd { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:36px; }
@@ -223,13 +211,11 @@
       background:linear-gradient(to top,rgba(0,229,255,.12),transparent);
       opacity:0; transition:opacity .3s; }
     .g-item:hover .g-ov { opacity:1; }
-
     /* ── FUND ── */
     .fund { background:var(--void); overflow:hidden; }
     .fund::before { content:''; position:absolute; top:-250px; right:-250px; width:650px; height:650px;
       background:radial-gradient(circle,rgba(0,229,255,.04),transparent 70%); pointer-events:none; }
     .fund-g { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; }
-
     .prog-wrap { margin:38px 0; }
     .prog-labels { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px; }
     .prog-raised { font-family:var(--df); font-size:clamp(1.4rem,3vw,2.2rem); color:var(--bright); }
@@ -244,7 +230,6 @@
     .prog-meta { display:flex; gap:28px; }
     .pm { font-size:.72rem; color:var(--dim); }
     .pm strong { color:var(--bright); display:block; font-size:.95rem; margin-bottom:2px; }
-
     .ms { margin-top:36px; }
     .m { display:flex; gap:14px; align-items:flex-start; padding:14px 0;
       border-bottom:1px solid var(--border); }
@@ -255,7 +240,6 @@
     .m-t { font-size:.82rem; color:var(--dim); line-height:1.5; }
     .m-t strong { color:var(--bright); display:block; margin-bottom:2px; }
     .m.done .m-t strong { color:var(--cyan); }
-
     /* ── PAY CARD ── */
     .pay-card { background:var(--s2); border:1px solid var(--border); padding:38px;
       clip-path:polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 22px 100%, 0 calc(100% - 22px));
@@ -276,7 +260,6 @@
       transition:all .3s; }
     .upi-btn:hover, .upi-button:hover { opacity:.85; transform:translateY(-2px); box-shadow:0 10px 30px var(--cyan-g); }
     .pay-note { font-size:.67rem; color:var(--dim); text-align:center; margin-top:14px; line-height:1.7; }
-
     /* ── FAQ ── */
     .faq { background:var(--s1); }
     .faq-in { max-width:720px; margin:0 auto; }
@@ -290,7 +273,6 @@
     .faq-a { max-height:0; overflow:hidden; transition:max-height .4s ease; }
     .faq-a-in { padding-bottom:22px; font-size:.88rem; color:var(--dim); line-height:1.8; }
     .faq-i.open .faq-a { max-height:300px; }
-
     /* ── FOOTER ── */
     footer { position:relative; z-index:1; background:var(--void);
       border-top:1px solid var(--border); padding:56px 5% 28px; }
@@ -310,15 +292,12 @@
     .ft-copy { font-size:.7rem; color:var(--dim); }
     .ft-badge { font-size:.6rem; letter-spacing:.3em; color:var(--dim);
       border:1px solid var(--border); padding:5px 12px; }
-
     /* ── SCROLL REVEAL ── */
     .rv { opacity:0; transform:translateY(36px); transition:opacity .7s ease, transform .7s ease; }
     .rv.on { opacity:1; transform:translateY(0); }
-
     /* ── KEYFRAMES ── */
     @keyframes fUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
     @keyframes fIn  { from{opacity:0} to{opacity:1} }
-
     /* ── LIGHTBOX ── */
     #lb { display:none; position:fixed; inset:0; background:rgba(0,0,0,.93); z-index:1000;
       align-items:center; justify-content:center; backdrop-filter:blur(12px); }
@@ -326,7 +305,6 @@
     #lb-x { position:absolute; top:28px; right:28px; color:var(--bright); font-size:1.4rem;
       cursor:pointer; background:none; border:none; font-family:var(--bf); }
     #lb img { max-width:88vw; max-height:88vh; object-fit:contain; }
-
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       .hero-grid { grid-template-columns:1fr; }
@@ -357,23 +335,18 @@
   </style>
 </head>
 <body>
-
 <div id="cur"></div>
 <div id="cur-r"></div>
-
 <div id="loader">
   <div class="pre-logo">MX<b>SA</b></div>
   <div class="pre-bar"></div>
   <div class="pre-sub">Initializing</div>
 </div>
-
 <canvas id="bg"></canvas>
-
 <div id="lb">
   <button id="lb-x">✕</button>
   <img id="lb-img" src="" alt="Project Photo">
 </div>
-
 <nav>
   <a href="#" class="nav-logo">MX<b>SA</b></a>
   <ul class="nav-links" id="navLinks">
@@ -386,7 +359,6 @@
     <span></span><span></span><span></span>
   </div>
 </nav>
-
 <section class="hero" id="home">
   <div class="hero-grid">
     <div>
@@ -403,7 +375,6 @@
         <a href="#about" class="btn-g">Learn More</a>
       </div>
     </div>
-
     <div class="h-vis">
       <div class="h-frame">
         <img src="images/T.jpg" alt="Project MXSA Bionic Arm">
@@ -413,13 +384,11 @@
       </div>
     </div>
   </div>
-
   <div class="scroll-hint">
     <div class="scl-line"></div>
     <span>Scroll</span>
   </div>
 </section>
-
 <div class="stats">
   <div class="stats-grid">
     <div class="stat rv">
@@ -440,7 +409,6 @@
     </div>
   </div>
 </div>
-
 <section class="about pad" id="about">
   <div class="about-g">
     <div class="about-text rv">
@@ -469,7 +437,6 @@
     </div>
   </div>
 </section>
-
 <section class="pad" id="features">
   <div class="rv">
     <div class="s-tag">Core Technology</div>
@@ -502,7 +469,6 @@
     </div>
   </div>
 </section>
-
 <section class="gallery pad" id="gallery">
   <div class="gal-hd rv">
     <div>
@@ -526,15 +492,12 @@
     </div>
   </div>
 </section>
-
 <section class="fund pad" id="fund">
   <div class="fund-g">
-
     <div class="rv">
       <div class="s-tag">Support The Build</div>
       <h2 class="s-title">Fund<br><em>Project MXSA</em></h2>
       <p class="s-desc">Your contribution directly funds hardware prototyping, AI model training, sensor procurement, and making this technology open-source for the world.</p>
-
       <div class="prog-wrap">
         <div class="prog-labels">
           <span class="prog-raised">₹<b id="raisedAmt">725</b></span>
@@ -547,7 +510,6 @@
           <div class="pm"><strong>100%</strong>Open Source</div>
         </div>
       </div>
-
       <div class="ms">
         <div class="m done">
           <div class="m-dot"></div>
@@ -571,42 +533,54 @@
         </div>
       </div>
     </div>
-
     <div class="rv">
       <div class="pay-card">
         <div class="pay-t">Contribute via UPI</div>
         <div class="pay-s">Fund To MXSA</div>
-
         <div class="qr-wrap">
           <img id="qrImg"
             src=""
             width="156" height="156" alt="Scan to Pay — UPI">
         </div>
-
         <div class="upi-id">UPI Payment ID<strong>maxsharma0137@fam</strong></div>
-
         <!-- The Button -->
         <a class="upi-btn" href="#" onclick="openUpiApp(event)">FUND</a>
-
         <div class="pay-note">
-          Tap FUND to open your UPI app directly.<br>
+          Tap FUND to copy the UPI ID.<br>
           Or scan the QR code — works with PhonePe, GPay, Paytm &amp; BHIM.
         </div>
-
         <!-- The Script -->
         <script>
           function openUpiApp(event) {
             // Prevent the default link behavior
             event.preventDefault();
-
-            // Your exact UPI deep link string
-            var upiUrl = 'upi://pay?pa=maxsharma0137@fam&pn=Project&cu=INR&tn=Support%20Project%20MXSA';
-
-            // Force a clean system-level window redirection
-            // This bypasses the in-app browser security restrictions
-            window.location.href = upiUrl;
+            var upiId = 'maxsharma0137@fam';
+            
+            // Modern Clipboard API
+            if (navigator.clipboard && window.isSecureContext) {
+              navigator.clipboard.writeText(upiId).then(function() {
+                alert("We have copied the upi id of the owner and now, you may paste this in your payment app.");
+              }).catch(function(err) {
+                alert("Please manually copy the UPI ID: " + upiId);
+              });
+            } else {
+              // Fallback for older browsers or non-HTTPS connections
+              var textArea = document.createElement("textarea");
+              textArea.value = upiId;
+              textArea.style.position = "fixed";
+              textArea.style.left = "-999999px";
+              document.body.appendChild(textArea);
+              textArea.focus();
+              textArea.select();
+              try {
+                document.execCommand('copy');
+                alert("We have copied the upi id of the owner and now, you may paste this in your payment app.");
+              } catch (err) {
+                alert("Please manually copy the UPI ID: " + upiId);
+              }
+              document.body.removeChild(textArea);
+            }
           }
-
           // Generate QR code from the same UPI URL
           document.getElementById('qrImg').src =
             'https://api.qrserver.com/v1/create-qr-code/?size=156x156&data=' +
@@ -614,10 +588,8 @@
         </script>
       </div>
     </div>
-
   </div>
 </section>
-
 <section class="faq pad">
   <div class="faq-in rv">
     <div class="s-tag">Common Questions</div>
@@ -642,7 +614,6 @@
     </div>
   </div>
 </section>
-
 <footer>
   <div class="ft">
     <div>
@@ -669,17 +640,7 @@
     <div class="ft-badge">MADE IN INDIA 🇮🇳</div>
   </div>
 </footer>
-
 <script>
-/* ════════════════════════════════════════════════
-   CONFIG — update RAISED and CONTRIBUTORS as
-   donations come in. All formatting is handled
-   automatically via fmtINR().
-   ════════════════════════════════════════════════ */
-const RAISED       = 725;
-const GOAL         = 2000;
-const CONTRIBUTORS = 3;
-
 /* ── RELIABLE INR FORMATTER ──────────────────────
    toLocaleString('en-IN') silently returns "0" on
    some Android WebViews. This formatter always
@@ -691,19 +652,18 @@ function fmtINR(n) {
   var rest   = s.slice(0, -3);
   return rest.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + ',' + last3;
 }
-
 /* Inject config into DOM immediately (no flash) */
 document.getElementById('raisedAmt').textContent = fmtINR(RAISED);
 document.getElementById('goalAmt').textContent   = fmtINR(GOAL);
-document.getElementById('bcnt').textContent      = CONTRIBUTORS;
-
+document.getElementById('bcnt').textContent      = CONTRIBUTORS.length;
+// Tooltip to show contributor names when hovered over the contributors section
+document.getElementById('bcnt').parentElement.title = "Contributors: " + CONTRIBUTORS.join(', ');
 /* ── PRELOADER ── */
 window.addEventListener('load', function () {
   setTimeout(function () {
     document.getElementById('loader').classList.add('out');
   }, 1600);
 });
-
 /* ── CUSTOM CURSOR (desktop only) ── */
 var cur  = document.getElementById('cur');
 var ring = document.getElementById('cur-r');
@@ -732,7 +692,6 @@ document.querySelectorAll('a, button, .g-item, .faq-q').forEach(function (el) {
     ring.style.opacity   = '1';
   });
 });
-
 /* ── CANVAS BACKGROUND ── */
 var cv = document.getElementById('bg');
 var ctx = cv.getContext('2d');
@@ -762,7 +721,6 @@ function drawBg() {
 }
 resizeBg();
 window.addEventListener('resize', resizeBg);
-
 /* ── SCROLL REVEAL ── */
 var ro = new IntersectionObserver(function (entries) {
   entries.forEach(function (e) {
@@ -773,7 +731,6 @@ var ro = new IntersectionObserver(function (entries) {
   });
 }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.rv').forEach(function (el) { ro.observe(el); });
-
 /* ── STAT COUNTERS ── */
 function countUp(el, target) {
   var nb = el.querySelector('b');
@@ -797,7 +754,6 @@ var statObs = new IntersectionObserver(function (entries) {
   });
 }, { threshold: 0.5 });
 document.querySelectorAll('[data-val]').forEach(function (el) { statObs.observe(el); });
-
 /* ── PROGRESS BAR ── */
 var fundSec = document.getElementById('fund');
 if (fundSec) {
@@ -812,7 +768,6 @@ if (fundSec) {
   }, { threshold: 0.3 });
   fo.observe(fundSec);
 }
-
 /* ── FAQ ACCORDION ── */
 function faq(el) {
   var item = el.parentElement;
@@ -820,7 +775,6 @@ function faq(el) {
   document.querySelectorAll('.faq-i').forEach(function (i) { i.classList.remove('open'); });
   if (!wasOpen) item.classList.add('open');
 }
-
 /* ── MOBILE NAV ── */
 function toggleNav() {
   document.getElementById('navLinks').classList.toggle('open');
@@ -830,7 +784,6 @@ document.querySelectorAll('.nav-links a').forEach(function (a) {
     document.getElementById('navLinks').classList.remove('open');
   });
 });
-
 /* ── LIGHTBOX ── */
 function openLb(el) {
   var img = el.querySelector('img');
@@ -844,7 +797,6 @@ document.getElementById('lb-x').onclick = function () {
 document.getElementById('lb').onclick = function (e) {
   if (e.target === e.currentTarget) e.currentTarget.classList.remove('on');
 };
-
 /* ── SMOOTH SCROLL ── */
 document.querySelectorAll('a[href^="#"]').forEach(function (a) {
   var href = a.getAttribute('href');
