@@ -7,9 +7,7 @@
        Update these variables to reflect your project's current status.
        They automatically control the text, stats, marquee, and progress bar.
        ════════════════════════════════════════════════ */
-    const RAISED = 926;
-    const GOAL = 1550;
-    const CONTRIBUTORS = ["Ms.Rohnika Sharma & Ms.Neha Vohra-[Biggest Donator]", "Ms.Shivali Gupta", "Mr.Vinus Sharma", "Own.Vikalp Sharma"]; // Add all contributors' names here
+    const CONTRIBUTORS = ["Ms.Rohnika Sharma & Ms.Neha Vohra-[Biggest Donator]", "Ms.Shivali Gupta", "Mr.Vinus Sharma", "Own.Vikalp Sharma"];
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -145,7 +143,12 @@
     .h-desc { font-size:clamp(.85rem,1.4vw,.95rem); line-height:1.85; color:var(--text);
       max-width:500px; margin-bottom:36px; opacity:0; animation:fUp .8s ease 2.2s forwards; }
 
-    .h-acts { display:flex; gap:14px; align-items:center; opacity:0; animation:fUp .8s ease 2.4s forwards; }
+    .h-acts { display:flex; gap:14px; align-items:center; opacity:0; animation:fUp .8s ease 2.4s forwards; margin-bottom: 36px; }
+
+    .h-backers { opacity:0; animation:fUp .8s ease 2.6s forwards; border-top: 1px solid var(--border); padding-top: 20px; max-width: 500px; }
+    .h-backers-title { font-size: .65rem; letter-spacing: .25em; color: var(--dim); text-transform: uppercase; margin-bottom: 12px; display: block; }
+    .h-backers-list { font-size: .8rem; color: var(--text); line-height: 1.7; }
+    .h-backers-list b { color: var(--cyan); font-weight: normal; margin: 0 8px; }
 
     .btn-p { padding:13px 30px; background:var(--cyan); color:var(--void);
       font-family:var(--bf); font-weight:700; font-size:.72rem; letter-spacing:.2em;
@@ -257,26 +260,11 @@
       opacity:0; transition:opacity .3s; }
     .g-item:hover .g-ov { opacity:1; }
 
-    /* ── FUND ── */
+    /* ── CONTRIBUTORS ── */
     .fund { background:var(--void); overflow:hidden; }
     .fund::before { content:''; position:absolute; top:-250px; right:-250px; width:650px; height:650px;
       background:radial-gradient(circle,rgba(0,229,255,.04),transparent 70%); pointer-events:none; }
     .fund-g { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; }
-
-    .prog-wrap { margin:38px 0; }
-    .prog-labels { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px; }
-    .prog-raised { font-family:var(--df); font-size:clamp(1.4rem,3vw,2.2rem); color:var(--bright); }
-    .prog-raised b { color:var(--cyan); }
-    .prog-goal { font-size:.75rem; color:var(--dim); letter-spacing:.1em; }
-    .prog-bar { height:3px; background:var(--s3); width:100%; position:relative; margin-bottom:14px; }
-    .prog-fill { height:100%; background:linear-gradient(90deg,var(--cyan),rgba(0,229,255,.45));
-      width:0; transition:width 1.6s ease; position:relative; }
-    .prog-fill::after { content:''; position:absolute; right:-5px; top:-4px;
-      width:11px; height:11px; background:var(--cyan); border-radius:50%;
-      box-shadow:0 0 12px var(--cyan); }
-    .prog-meta { display:flex; gap:28px; }
-    .pm { font-size:.72rem; color:var(--dim); }
-    .pm strong { color:var(--bright); display:block; font-size:.95rem; margin-bottom:2px; }
 
     .ms { margin-top:36px; }
     .m { display:flex; gap:14px; align-items:flex-start; padding:14px 0;
@@ -296,18 +284,6 @@
     .pay-t { font-family:var(--df); font-size:.8rem; color:var(--bright);
       letter-spacing:.1em; margin-bottom:6px; }
     .pay-s { font-size:.78rem; color:var(--dim); margin-bottom:26px; }
-    .qr-wrap { width:180px; height:180px; margin:0 auto 26px; padding:12px;
-      background:#fff; display:flex; align-items:center; justify-content:center; }
-    #qrImg { width:156px !important; height:156px !important; display:block; }
-    .upi-id { text-align:center; font-size:.7rem; color:var(--dim); margin-bottom:26px;
-      padding:10px; background:var(--s3); border:1px solid var(--border); }
-    .upi-id strong { color:var(--cyan); display:block; font-size:.82rem; margin-top:4px; letter-spacing:.05em; }
-    .upi-btn, .upi-button { display:block; width:100%; padding:15px; background:var(--cyan); color:var(--void);
-      font-family:var(--bf); font-weight:700; font-size:.85rem; letter-spacing:.35em;
-      text-transform:uppercase; text-decoration:none; text-align:center; border:none; cursor:pointer;
-      clip-path:polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
-      transition:all .3s; }
-    .upi-btn:hover, .upi-button:hover { opacity:.85; transform:translateY(-2px); box-shadow:0 10px 30px var(--cyan-g); }
     .pay-note { font-size:.67rem; color:var(--dim); text-align:center; margin-top:14px; line-height:1.7; }
 
     /* ── FAQ ── */
@@ -418,7 +394,7 @@
     <li><a href="#about">About</a></li>
     <li><a href="#features">Architecture</a></li>
     <li><a href="#gallery">Gallery</a></li>
-    <li><a href="#fund" class="nav-cta">Fund Project</a></li>
+    <li><a href="#contributors" class="nav-cta">Contributors</a></li>
   </ul>
   <div class="ham" id="ham" onclick="toggleNav()">
     <span></span><span></span><span></span>
@@ -437,8 +413,13 @@
         A fully localized, autonomous entity capable of perceiving its environment, understanding natural language, expressing dynamic emotions, and physically manipulating objects using its highly advanced Shadow Arm.
       </p>
       <div class="h-acts">
-        <a href="#fund" class="btn-p">Fund This Project</a>
+        <a href="#contributors" class="btn-p">View Contributors</a>
         <a href="#about" class="btn-g">Learn More</a>
+      </div>
+
+      <div class="h-backers">
+        <span class="h-backers-title">Made Possible By Our Funders</span>
+        <div class="h-backers-list" id="heroBackersList"></div>
       </div>
     </div>
 
@@ -570,112 +551,30 @@
   </div>
 </section>
 
-<section class="fund pad" id="fund">
+<section class="fund pad" id="contributors">
   <div class="fund-g">
 
     <div class="rv">
-      <div class="s-tag">Support The Build</div>
-      <h2 class="s-title">Fund<br><em>Project MXSA</em></h2>
-      <p class="s-desc">Your contribution directly funds hardware prototyping, AI model training, sensor procurement, and the future development of this proprietary edge architecture.</p>
+      <div class="s-tag">Target Reached</div>
+      <h2 class="s-title">Project<br><em>Fully Funded</em></h2>
+      <p class="s-desc">Project MXSA has officially reached its funding target. We extend our deepest gratitude to the visionary individuals who made this proprietary edge architecture a reality.</p>
 
-      <div class="prog-wrap">
-        <div class="prog-labels">
-          <span class="prog-raised">₹<b id="raisedAmt">725</b></span>
-          <span class="prog-goal">Goal: ₹<span id="goalAmt">2,000</span></span>
-        </div>
-        <div class="prog-bar"><div class="prog-fill" id="pFill"></div></div>
-        <div class="prog-meta">
-          <div class="pm"><strong id="bcnt">3</strong>Contributors</div>
-          <div class="pm"><strong>Open</strong>Status</div>
-          <div class="pm"><strong>100%</strong>Private Edge AI</div>
-        </div>
-      </div>
-
-      <div class="ms">
-        <div class="m done">
-          <div class="m-dot"></div>
-          <div class="m-t"><strong>₹0 — Launch</strong>Project inception, LLM integration, basic architecture</div>
-        </div>
-        <div class="m">
-          <div class="m-dot"></div>
-          <div class="m-t"><strong>₹500 — Materials</strong>Components for the Shadow Arm (servos, filament)</div>
-        </div>
-        <div class="m">
-          <div class="m-dot"></div>
-          <div class="m-t"><strong>₹1,000 — Edge AI Upgrade</strong>Raspberry Pi cooling & dedicated Edge TPU compute</div>
-        </div>
-        <div class="m">
-          <div class="m-dot"></div>
-          <div class="m-t"><strong>₹1,500 — Computer Vision</strong>Camera mounting & custom YOLO model training</div>
-        </div>
-        <div class="m">
-          <div class="m-dot"></div>
-          <div class="m-t"><strong>₹2,000 — Final Form</strong>Full autonomy, infinite runtime, proprietary rollout</div>
-        </div>
+      <div class="ms" id="contribList">
+        <!-- JS will inject contributors here -->
       </div>
     </div>
 
     <div class="rv">
-      <div class="pay-card">
-        <div class="pay-t">Direct Funding Portal</div>
-        <div class="pay-s">100% of proceeds go to hardware &amp; research compute.</div>
+      <div class="pay-card" style="text-align: center; padding-top: 50px; padding-bottom: 50px;">
+        <div class="pay-t" style="font-size: 1.2rem; color: var(--cyan); margin-bottom: 12px; letter-spacing: 0.2em;">FUNDING CLOSED</div>
+        <div class="pay-s" style="margin-bottom: 26px;">100% of proceeds secured for hardware &amp; research.</div>
 
-        <div class="qr-wrap">
-          <img id="qrImg"
-            src=""
-            width="156" height="156" alt="Scan to Pay — UPI">
+        <div style="font-size: 4rem; margin-bottom: 26px;">🚀</div>
+
+        <div class="pay-note" style="margin-top: 14px;">
+          The direct funding portal is now closed.<br>
+          Please track our visual logs for progress updates.
         </div>
-
-        <div class="upi-id">Official UPI Payment ID<strong>maxsharma0137@fam</strong></div>
-
-        <!-- The Button -->
-        <a class="upi-btn" href="#" onclick="openUpiApp(event)">SUPPORT MXSA</a>
-
-        <div class="pay-note">
-          <strong>How to contribute:</strong><br><br>
-          1. Tap the button above to copy the official UPI ID to your clipboard.<br>
-          2. Alternatively, open any UPI app (GPay, PhonePe, Paytm) and scan the secure QR code directly.
-        </div>
-
-        <!-- The Script -->
-        <script>
-          function openUpiApp(event) {
-            // Prevent the default link behavior
-            event.preventDefault();
-
-            var upiId = 'maxsharma0137@fam';
-            
-            // Modern Clipboard API
-            if (navigator.clipboard && window.isSecureContext) {
-              navigator.clipboard.writeText(upiId).then(function() {
-                alert("We have copied the upi id of the owner and now, you may paste this in your payment app.");
-              }).catch(function(err) {
-                alert("Please manually copy the UPI ID: " + upiId);
-              });
-            } else {
-              // Fallback for older browsers or non-HTTPS connections
-              var textArea = document.createElement("textarea");
-              textArea.value = upiId;
-              textArea.style.position = "fixed";
-              textArea.style.left = "-999999px";
-              document.body.appendChild(textArea);
-              textArea.focus();
-              textArea.select();
-              try {
-                document.execCommand('copy');
-                alert("We have copied the upi id of the owner and now, you may paste this in your payment app.");
-              } catch (err) {
-                alert("Please manually copy the UPI ID: " + upiId);
-              }
-              document.body.removeChild(textArea);
-            }
-          }
-
-          // Generate QR code from the same UPI URL
-          document.getElementById('qrImg').src =
-            'https://api.qrserver.com/v1/create-qr-code/?size=156x156&data=' +
-            encodeURIComponent('upi://pay?pa=maxsharma0137@fam&pn=Project&cu=INR&tn=Support%20Project%20MXSA');
-        </script>
       </div>
     </div>
 
@@ -688,8 +587,8 @@
     <h2 class="s-title">FAQ</h2>
     <div class="faq-list">
       <div class="faq-i">
-        <div class="faq-q" onclick="faq(this)">What exactly does my money fund?</div>
-        <div class="faq-a"><div class="faq-a-in">Your contribution funds hardware components (servo motors, cameras, microcontrollers), AI model training compute, 3D printing materials, and development time. Every rupee is tracked and fuels the localized AI development.</div></div>
+        <div class="faq-q" onclick="faq(this)">What exactly did the money fund?</div>
+        <div class="faq-a"><div class="faq-a-in">The contributions successfully funded hardware components (servo motors, cameras, microcontrollers), AI model training compute, 3D printing materials, and development time. Every rupee was tracked and fueled the localized AI development.</div></div>
       </div>
       <div class="faq-i">
         <div class="faq-q" onclick="faq(this)">Is this project open-source?</div>
@@ -698,10 +597,6 @@
       <div class="faq-i">
         <div class="faq-q" onclick="faq(this)">How can I track progress?</div>
         <div class="faq-a"><div class="faq-a-in">This website is updated with new photos, build logs, and milestone updates as the project advances.</div></div>
-      </div>
-      <div class="faq-i">
-        <div class="faq-q" onclick="faq(this)">Is UPI the only payment method?</div>
-        <div class="faq-a"><div class="faq-a-in">Currently, UPI is the primary method for quick and fee-free transfers within India. If you'd like to contribute through another method, you can reach out via email or social media. International supporters are especially welcome — please get in touch.</div></div>
       </div>
     </div>
   </div>
@@ -719,12 +614,12 @@
         <a href="#about">About</a>
         <a href="#features">Architecture</a>
         <a href="#gallery">Gallery</a>
-        <a href="#fund">Fund Us</a>
+        <a href="#contributors">Contributors</a>
       </div>
       <div class="ft-col">
-        <h5>Support</h5>
-        <a href="upi://pay?pa=maxsharma0137@fam">Pay via UPI</a>
-        <a href="#fund">maxsharma0137@fam</a>
+        <h5>Contact</h5>
+        <a href="#">Support Center</a>
+        <a href="#">Research Log</a>
       </div>
     </div>
   </div>
@@ -747,12 +642,26 @@ function fmtINR(n) {
   return rest.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + ',' + last3;
 }
 
-/* Inject config into DOM immediately (no flash) */
-document.getElementById('raisedAmt').textContent = fmtINR(RAISED);
-document.getElementById('goalAmt').textContent   = fmtINR(GOAL);
-document.getElementById('bcnt').textContent      = CONTRIBUTORS.length;
-// Tooltip to show contributor names when hovered over the contributors section
-document.getElementById('bcnt').parentElement.title = "Contributors: " + CONTRIBUTORS.join(', ');
+/* INJECT CONTRIBUTORS LIST */
+var clist = document.getElementById('contribList');
+var heroList = document.getElementById('heroBackersList');
+
+if (heroList) {
+  heroList.innerHTML = CONTRIBUTORS.map(function(c) {
+    return c.replace('-[Biggest Donator]', ' <span style="color:var(--cyan); font-size:0.6rem; letter-spacing:0.1em; border:1px solid var(--cyan); padding:2px 6px; text-transform:uppercase; margin-left:4px;">Biggest Donator</span>');
+  }).join(' <b>•</b> ');
+}
+
+if (clist) {
+  CONTRIBUTORS.forEach(function(c, i) {
+    var num = (i + 1).toString().padStart(2, '0');
+    var extraClass = c.includes('Biggest') ? ' done' : ''; // Highlight the biggest donator
+    clist.innerHTML += '<div class="m' + extraClass + '">' +
+      '<div class="m-dot"></div>' +
+      '<div class="m-t"><strong>Contributor ' + num + '</strong>' + c + '</div>' +
+      '</div>';
+  });
+}
 
 /* MARQUEE INJECTION */
 const mStr = "🚀 HUGE THANKS TO OUR CONTRIBUTORS: " + CONTRIBUTORS.join(" • ") + " 🚀";
@@ -859,21 +768,6 @@ var statObs = new IntersectionObserver(function (entries) {
   });
 }, { threshold: 0.5 });
 document.querySelectorAll('[data-val]').forEach(function (el) { statObs.observe(el); });
-
-/* ── PROGRESS BAR ── */
-var fundSec = document.getElementById('fund');
-if (fundSec) {
-  var fo = new IntersectionObserver(function (entries) {
-    if (entries[0].isIntersecting) {
-      var pct = Math.min((RAISED / GOAL) * 100, 100).toFixed(2);
-      setTimeout(function () {
-        document.getElementById('pFill').style.width = pct + '%';
-      }, 300);
-      fo.unobserve(entries[0].target);
-    }
-  }, { threshold: 0.3 });
-  fo.observe(fundSec);
-}
 
 /* ── FAQ ACCORDION ── */
 function faq(el) {
